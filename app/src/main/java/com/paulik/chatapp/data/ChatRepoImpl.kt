@@ -5,17 +5,29 @@ import com.paulik.chatapp.domain.repo.ChatRepo
 
 class ChatRepoImpl : ChatRepo {
 
-    val chat = ChatEntity(
-        "10",
-        listOf("12"),
-        null
+    private val data: MutableList<ChatEntity> = mutableListOf(
+        ChatEntity(
+            "10",
+            listOf("12"),
+            null
+        ),
+        ChatEntity(
+            "11",
+            listOf("13"),
+            null
+        ),
+        ChatEntity(
+            "25",
+            listOf("15"),
+            null
+        )
     )
 
     override fun createChat(userId: String) {
         //TODO("Not yet implemented")
     }
 
-    override fun getChat(userId: String): ChatEntity {
-        return chat
+    override fun getChat(): List<ChatEntity> {
+        return ArrayList(data)
     }
 }

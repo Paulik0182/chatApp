@@ -17,6 +17,24 @@ class MessageRepoImpl : MessageRepo {
             "10",
             MessageStatus.LOADING,
             false
+        ),
+        MessageEntity(
+            "30",
+            "Как дела",
+            "13",
+            Calendar.getInstance().timeInMillis,
+            "11",
+            MessageStatus.LOADING,
+            false
+        ),
+        MessageEntity(
+            "40",
+            "добрый день",
+            "15",
+            Calendar.getInstance().timeInMillis,
+            "25",
+            MessageStatus.LOADING,
+            false
         )
     )
 
