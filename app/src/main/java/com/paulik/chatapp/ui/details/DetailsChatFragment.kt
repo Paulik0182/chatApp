@@ -3,6 +3,7 @@ package com.paulik.chatapp.ui.details
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulik.chatapp.App
@@ -70,9 +71,7 @@ class DetailsChatFragment : Fragment(R.layout.fragment_details_chat) {
         @JvmStatic
         fun newInstance(chatIds: String) =
             DetailsChatFragment().apply {
-                arguments = Bundle().apply {
-                    putString(IDS_CHAT_KEY, chatIds)
-                }
+                arguments = bundleOf(IDS_CHAT_KEY to chatIds)
             }
     }
 
