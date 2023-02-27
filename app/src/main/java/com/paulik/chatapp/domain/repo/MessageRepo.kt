@@ -9,5 +9,5 @@ interface MessageRepo {
     fun markMessageAsViewed(messageId: String)
     fun getMessages(chatId: String): List<MessageEntity>
 
-    fun getMessageUpdates(): Observable<MessageEntity>
+    fun getMessageUpdates(chatId: String): Observable<List<MessageEntity>>
 }

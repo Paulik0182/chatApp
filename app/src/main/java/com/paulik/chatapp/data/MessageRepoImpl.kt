@@ -4,6 +4,7 @@ import com.paulik.chatapp.domain.entity.MessageEntity
 import com.paulik.chatapp.domain.entity.MessageStatus
 import com.paulik.chatapp.domain.repo.MessageRepo
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.subjects.BehaviorSubject
 import java.util.*
 
 class MessageRepoImpl : MessageRepo {
@@ -74,6 +75,8 @@ class MessageRepoImpl : MessageRepo {
         ),
     )
 
+    // для подписки на обновления (прочитать про BehaviorSubject - это аналог LiveData)
+    private val messagesObservable = BehaviorSubject.createDefault<List<MessageEntity>>(messages)
     override fun sendMessage(chatId: String, text: String) {
         messages.add(
             MessageEntity(
@@ -86,6 +89,7 @@ class MessageRepoImpl : MessageRepo {
                 true
             )
         )
+        messagesObservable.onNext(messages)
     }
 
     override fun markMessageAsViewed(messageId: String) {
@@ -96,7 +100,7 @@ class MessageRepoImpl : MessageRepo {
         return messages.filter { it.chatId == chatId } // фильтруем сообщения по id (загружаем только нужные сообщения)
     }
 
-    override fun getMessageUpdates(): Observable<MessageEntity> {
-        TODO("Not yet implemented")
+    override fun getMessageUpdates(chatId: String): Observable<List<MessageEntity>> {
+        return messagesObservable
     }
 }
