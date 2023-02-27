@@ -13,7 +13,7 @@ class ChatRepoImpl : ChatRepo {
         ),
         ChatEntity(
             "11",
-            listOf("13"),
+            listOf("1"),
             null
         ),
         ChatEntity(

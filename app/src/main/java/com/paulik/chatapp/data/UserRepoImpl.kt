@@ -11,12 +11,12 @@ class UserRepoImpl : UsersRepo {
             "https://avatarko.ru/img/kartinka/11/Batman_10072.jpg" // todo
         ),
         UserEntity(
-            "13",
+            "1",
             "Mark",
             "https://avatarko.ru/img/kartinka/13/zhivotnye_tigr_12814.jpg" // todo
         ),
         UserEntity(
-            "25",
+            "44",
             "Jon",
             "https://avatarko.ru/img/kartinka/8/sobaka_prikol_7066.jpg" // todo
         )
