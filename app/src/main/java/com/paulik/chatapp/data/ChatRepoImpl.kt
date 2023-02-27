@@ -30,4 +30,8 @@ class ChatRepoImpl : ChatRepo {
     override fun getChats(): List<ChatEntity> {
         return ArrayList(data)
     }
+
+    override fun getChat(id: String): ChatEntity {
+        return getChats().first { it.id == id }
+    }
 }

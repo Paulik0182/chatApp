@@ -11,6 +11,7 @@ import com.paulik.chatapp.R
 import com.paulik.chatapp.databinding.FragmentChatRootBinding
 import com.paulik.chatapp.domain.entity.ChatEntity
 import com.paulik.chatapp.domain.repo.ChatRepo
+import com.paulik.chatapp.domain.repo.UsersRepo
 
 private const val IDS_USERS_KEY = "IDS_USERS_KEY"
 
@@ -24,11 +25,15 @@ class ChatRootFragment : Fragment(R.layout.fragment_chat_root) {
         app.chatRepo
     }
 
+    private val usersRepo: UsersRepo by lazy {
+        app.usersRepo
+    }
+
     private lateinit var adapter: ChatRootAdapter
 
     private val viewModel: ChatRootViewModel by viewModels {
         ChatRootViewModel.Factory(
-            chatRepo,
+            chatRepo, usersRepo
         )
     }
 
@@ -53,8 +58,8 @@ class ChatRootFragment : Fragment(R.layout.fragment_chat_root) {
         adapter = ChatRootAdapter(
             data = emptyList(),
             context = requireContext(),
-            onDetailsChatClickListener = {
-                viewModel.onChatClick(it)
+            onDetailsChatClickListener = { chatId ->
+                viewModel.onChatClick(chatId)
             } // todo не понял зачем
         )
         binding.recordsRecyclerView.adapter = adapter

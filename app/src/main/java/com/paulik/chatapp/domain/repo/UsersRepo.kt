@@ -6,4 +6,5 @@ interface UsersRepo {
 
     fun addUser(userEntity: UserEntity)
     fun getUsers(): List<UserEntity>
+    fun getUser(userId: String): UserEntity
 }

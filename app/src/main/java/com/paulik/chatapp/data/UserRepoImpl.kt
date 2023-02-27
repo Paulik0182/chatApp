@@ -19,6 +19,11 @@ class UserRepoImpl : UsersRepo {
             "3",
             "Jon",
             "https://avatarko.ru/img/kartinka/8/sobaka_prikol_7066.jpg" // todo
+        ),
+        UserEntity(
+            "4",
+            "Tom",
+            "https://avatarko.ru/img/kartinka/11/Batman_10072.jpg" // todo
         )
     )
 
@@ -28,5 +33,9 @@ class UserRepoImpl : UsersRepo {
 
     override fun getUsers(): List<UserEntity> {
         return ArrayList(user)
+    }
+
+    override fun getUser(userId: String): UserEntity {
+        return getUsers().first { it.id == userId }
     }
 }

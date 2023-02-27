@@ -6,4 +6,5 @@ interface ChatRepo {
 
     fun createChat(userId: String)
     fun getChats(): List<ChatEntity>
+    fun getChat(id: String): ChatEntity
 }

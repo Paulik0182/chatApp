@@ -4,16 +4,17 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.paulik.chatapp.domain.entity.ChatEntity
+import com.paulik.chatapp.domain.repo.ChatViewEntity
 
 class ChatRootAdapter(
-    private var data: List<ChatEntity> = mutableListOf(),
+    private var data: List<ChatViewEntity> = mutableListOf(),
     val context: Context,
-    private val onDetailsChatClickListener: (ChatEntity) -> Unit = {}
+    private val onDetailsChatClickListener: (String) -> Unit = {}
 ) : RecyclerView.Adapter<ChatRootViewHolder>() {
 
+
     @SuppressLint("NotifyDataSetChanged")
-    fun setData(chats: List<ChatEntity>) {
+    fun setData(chats: List<ChatViewEntity>) {
         data = chats
         notifyDataSetChanged()
     }
@@ -26,7 +27,7 @@ class ChatRootAdapter(
         )
     }
 
-    private fun getItem(position: Int): ChatEntity = data[position]
+    private fun getItem(position: Int): ChatViewEntity = data[position]
 
     override fun getItemCount(): Int = data.size
 
