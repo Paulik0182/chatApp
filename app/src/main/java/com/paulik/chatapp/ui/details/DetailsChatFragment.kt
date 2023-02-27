@@ -11,7 +11,7 @@ import com.paulik.chatapp.R
 import com.paulik.chatapp.databinding.FragmentDetailsChatBinding
 import com.paulik.chatapp.domain.repo.MessageRepo
 
-private const val IDS_CHAT_KEY = "IDS_CHAT_KEY"
+private const val ID_CHAT_KEY = "ID_CHAT_KEY"
 
 
 class DetailsChatFragment : Fragment(R.layout.fragment_details_chat) {
@@ -30,7 +30,7 @@ class DetailsChatFragment : Fragment(R.layout.fragment_details_chat) {
     private val viewModel: DetailsChatViewModel by lazy {
         DetailsChatViewModel(
             messageRepo,
-            requireArguments().getString(IDS_CHAT_KEY)!!
+            requireArguments().getString(ID_CHAT_KEY)!!
         )
     }
 
@@ -71,7 +71,7 @@ class DetailsChatFragment : Fragment(R.layout.fragment_details_chat) {
         @JvmStatic
         fun newInstance(chatIds: String) =
             DetailsChatFragment().apply {
-                arguments = bundleOf(IDS_CHAT_KEY to chatIds)
+                arguments = bundleOf(ID_CHAT_KEY to chatIds)
             }
     }
 

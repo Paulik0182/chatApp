@@ -12,7 +12,7 @@ class MessageRepoImpl : MessageRepo {
         MessageEntity(
             "20",
             "Привет",
-            "12",
+            "2",
             Calendar.getInstance().timeInMillis,
             "10",
             MessageStatus.LOADING,
@@ -30,7 +30,7 @@ class MessageRepoImpl : MessageRepo {
         MessageEntity(
             "30",
             "Как дела",
-            "12",
+            "2",
             Calendar.getInstance().timeInMillis,
             "10",
             MessageStatus.LOADING,
@@ -48,7 +48,7 @@ class MessageRepoImpl : MessageRepo {
         MessageEntity(
             "40",
             "ОК",
-            "12",
+            "2",
             Calendar.getInstance().timeInMillis,
             "10",
             MessageStatus.LOADING,
@@ -57,7 +57,7 @@ class MessageRepoImpl : MessageRepo {
         MessageEntity(
             "410",
             "Привет, это другой чат",
-            "44",
+            "3",
             Calendar.getInstance().timeInMillis,
             "25",
             MessageStatus.LOADING,
@@ -93,7 +93,7 @@ class MessageRepoImpl : MessageRepo {
     }
 
     override fun getMessages(chatId: String): List<MessageEntity> {
-        return messages
+        return messages.filter { it.chatId == chatId } // фильтруем сообщения по id (загружаем только нужные сообщения)
     }
 
     override fun getMessageUpdates(): Observable<MessageEntity> {

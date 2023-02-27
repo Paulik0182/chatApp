@@ -25,7 +25,7 @@ class ChatRootViewModel(
 
     init {
         if (chatLiveData.value == null) {
-            chatRepo.getChat().let {
+            chatRepo.getChats().let {
                 chatLiveData.mutable().postValue(it)
             }
         }

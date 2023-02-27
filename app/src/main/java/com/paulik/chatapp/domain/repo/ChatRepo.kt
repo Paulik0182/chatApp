@@ -5,5 +5,5 @@ import com.paulik.chatapp.domain.entity.ChatEntity
 interface ChatRepo {
 
     fun createChat(userId: String)
-    fun getChat(): List<ChatEntity>
+    fun getChats(): List<ChatEntity>
 }

@@ -29,7 +29,6 @@ class ChatRootFragment : Fragment(R.layout.fragment_chat_root) {
     private val viewModel: ChatRootViewModel by viewModels {
         ChatRootViewModel.Factory(
             chatRepo,
-//            requireActivity().getString(IDS_USERS_KEY)!!
         )
     }
 

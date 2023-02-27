@@ -8,17 +8,17 @@ class ChatRepoImpl : ChatRepo {
     private val data: MutableList<ChatEntity> = mutableListOf(
         ChatEntity(
             "10",
-            listOf("12"),
-            null
-        ),
-        ChatEntity(
-            "11",
-            listOf("1"),
+            listOf("1", "2"),
             null
         ),
         ChatEntity(
             "25",
-            listOf("15"),
+            listOf("1", "3"),
+            null
+        ),
+        ChatEntity(
+            "30",
+            listOf("1", "4"),
             null
         )
     )
@@ -27,7 +27,7 @@ class ChatRepoImpl : ChatRepo {
         //TODO("Not yet implemented")
     }
 
-    override fun getChat(): List<ChatEntity> {
+    override fun getChats(): List<ChatEntity> {
         return ArrayList(data)
     }
 }
