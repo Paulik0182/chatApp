@@ -1,4 +1,4 @@
-package com.paulik.chatapp.ui
+package com.paulik.chatapp.ui.root
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +10,6 @@ import com.paulik.chatapp.ui.details.DetailsChatFragment
 
 private const val TAG_MAIN_CONTAINER_LAYOUT_KEY = "TAG_MAIN_CONTAINER_LAYOUT_KEY"
 private const val TAG_DETAILS_CHAT_KEY = "TAG_DETAILS_CHAT_KEY"
-
 
 class RootActivity : AppCompatActivity(),
     ChatRootFragment.Controller,

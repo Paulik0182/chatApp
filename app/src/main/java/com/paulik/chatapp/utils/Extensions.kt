@@ -29,6 +29,14 @@ fun Context.toastMake(text: String) {
     Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
 }
 
+fun Context.toastMake(text: Int) {
+    Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+}
+
+fun View.toastMake(text: String) {
+    Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+}
+
 // только для дебажной версии
 fun Context.showDebugToast(text: String) {
     if (BuildConfig.DEBUG) {

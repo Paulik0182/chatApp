@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.paulik.chatapp.domain.repo.ChatViewEntity
+import com.paulik.chatapp.domain.entity.ChatViewEntity
 
 class ChatRootAdapter(
     private var data: List<ChatViewEntity> = mutableListOf(),

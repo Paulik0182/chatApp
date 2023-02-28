@@ -1,4 +1,4 @@
-package com.paulik.chatapp.domain.repo
+package com.paulik.chatapp.domain.entity
 
 data class ChatViewEntity(
     val chatId: String,

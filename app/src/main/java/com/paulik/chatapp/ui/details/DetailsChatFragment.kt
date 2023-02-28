@@ -9,7 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulik.chatapp.App
 import com.paulik.chatapp.R
 import com.paulik.chatapp.databinding.FragmentDetailsChatBinding
+import com.paulik.chatapp.domain.interactors.MessageCreatorInteractor
 import com.paulik.chatapp.domain.repo.MessageRepo
+import com.paulik.chatapp.ui.root.CreationChatMessageErrors
+import com.paulik.chatapp.utils.toastMake
+import java.util.*
 
 private const val ID_CHAT_KEY = "ID_CHAT_KEY"
 
@@ -25,12 +29,20 @@ class DetailsChatFragment : Fragment(R.layout.fragment_details_chat) {
         app.messageRepo
     }
 
+    private val messageCreatorInteractor: MessageCreatorInteractor by lazy {
+        app.messageCreatorInteractor
+    }
+
     private lateinit var adapter: DetailsChatAdapter
+
+    private val timeSendingMessage = Calendar.getInstance()
 
     private val viewModel: DetailsChatViewModel by lazy {
         DetailsChatViewModel(
-            messageRepo,
-            requireArguments().getString(ID_CHAT_KEY)!!
+            messageRepo = messageRepo,
+            chatId = requireArguments().getString(ID_CHAT_KEY)!!,
+            context = requireContext(),
+            messageCreatorInteractor = messageCreatorInteractor
         )
     }
 
@@ -40,10 +52,7 @@ class DetailsChatFragment : Fragment(R.layout.fragment_details_chat) {
         _binding = FragmentDetailsChatBinding.bind(view)
 
         initView()
-
-        viewModel.messageLiveData.observe(viewLifecycleOwner) {
-            adapter.setData(it)
-        }
+        initObservers()
     }
 
     private fun initView() {
@@ -53,6 +62,41 @@ class DetailsChatFragment : Fragment(R.layout.fragment_details_chat) {
             context = requireContext()
         )
         binding.recordsRecyclerView.adapter = adapter
+
+        binding.sendMessageButton.setOnClickListener {
+            saveNewMessage()
+        }
+    }
+
+    private fun saveNewMessage() {
+        viewModel.onSaveNewMessage(
+            id = UUID.randomUUID().toString(),
+            authorId = "1",
+            chatId = requireArguments().getString(ID_CHAT_KEY)!!,
+            text = binding.descriptionEditText.text.toString(),
+            time = timeSendingMessage.timeInMillis,
+            mine = true
+        )
+        binding.descriptionEditText.text = null
+    }
+
+    private fun initObservers() {
+        viewModel.messageLiveData.observe(viewLifecycleOwner) {
+            adapter.setData(it)
+        }
+
+        viewModel.errorLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                is CreationChatMessageErrors.TextChatMessage -> {
+                    binding.descriptionEditText.error = it.errorsChatMessage
+                }
+                else -> {}
+            }
+        }
+
+        viewModel.dialogLiveData.observe(viewLifecycleOwner) {
+            context?.toastMake(it.massage)
+        }
     }
 
     interface Controller {

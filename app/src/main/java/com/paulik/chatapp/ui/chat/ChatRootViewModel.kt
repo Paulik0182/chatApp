@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.paulik.chatapp.domain.entity.ChatEntity
+import com.paulik.chatapp.domain.entity.ChatViewEntity
 import com.paulik.chatapp.domain.repo.ChatRepo
-import com.paulik.chatapp.domain.repo.ChatViewEntity
 import com.paulik.chatapp.domain.repo.UsersRepo
 import com.paulik.chatapp.utils.mutable
 

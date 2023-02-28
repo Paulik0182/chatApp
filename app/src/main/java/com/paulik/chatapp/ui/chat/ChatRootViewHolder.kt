@@ -7,7 +7,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.paulik.chatapp.R
 import com.paulik.chatapp.databinding.ItemRecordChatBinding
-import com.paulik.chatapp.domain.repo.ChatViewEntity
+import com.paulik.chatapp.domain.entity.ChatViewEntity
 import com.squareup.picasso.Picasso
 
 class ChatRootViewHolder(
