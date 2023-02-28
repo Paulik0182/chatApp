@@ -4,24 +4,22 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulik.chatapp.App
-import com.paulik.chatapp.R
 import com.paulik.chatapp.databinding.FragmentDetailsChatBinding
 import com.paulik.chatapp.domain.interactors.MessageCreatorInteractor
 import com.paulik.chatapp.domain.repo.MessageRepo
 import com.paulik.chatapp.ui.root.CreationChatMessageErrors
+import com.paulik.chatapp.ui.root.ViewBindingFragment
 import com.paulik.chatapp.utils.toastMake
 import java.util.*
 
 private const val ID_CHAT_KEY = "ID_CHAT_KEY"
 
 
-class DetailsChatFragment : Fragment(R.layout.fragment_details_chat) {
-
-    private var _binding: FragmentDetailsChatBinding? = null
-    private val binding get() = _binding!!
+class DetailsChatFragment : ViewBindingFragment<FragmentDetailsChatBinding>(
+    FragmentDetailsChatBinding::inflate
+) {
 
     private val app: App get() = requireActivity().application as App
 
@@ -48,8 +46,6 @@ class DetailsChatFragment : Fragment(R.layout.fragment_details_chat) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        _binding = FragmentDetailsChatBinding.bind(view)
 
         initView()
         initObservers()
@@ -117,10 +113,5 @@ class DetailsChatFragment : Fragment(R.layout.fragment_details_chat) {
             DetailsChatFragment().apply {
                 arguments = bundleOf(ID_CHAT_KEY to chatIds)
             }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
