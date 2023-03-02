@@ -10,7 +10,7 @@ import com.paulik.chatapp.domain.ErrorMessage
 import com.paulik.chatapp.domain.entity.MessageEntity
 import com.paulik.chatapp.domain.interactors.MessageCreatorInteractor
 import com.paulik.chatapp.domain.repo.MessageRepo
-import com.paulik.chatapp.ui.root.CloseDialog
+import com.paulik.chatapp.ui.CloseDialog
 import com.paulik.chatapp.ui.root.CreationChatMessageErrors
 import com.paulik.chatapp.utils.mutable
 import com.paulik.chatapp.utils.toString
@@ -19,7 +19,6 @@ import com.paulik.chatapp.utils.toString
 class DetailsChatViewModel(
     private val messageRepo: MessageRepo,
     private val chatId: String,
-    private val context: Context,
     private val messageCreatorInteractor: MessageCreatorInteractor
 
 ) : ViewModel() {
@@ -38,16 +37,12 @@ class DetailsChatViewModel(
                 messageLiveData.mutable().postValue(it)
             }
         }
-//        if (messageLiveData.value == null) {
-//            messageRepo.getMessages(chatId).let {
-//                messageLiveData.mutable().postValue(it)
-//            }
-//        }
     }
 
     // todo переделать репозиторий чтобы они были на реактивном программировании.
 
     fun onSaveNewMessage(
+        context: Context,
         id: String,
         authorId: String,
         chatId: String,
@@ -62,7 +57,7 @@ class DetailsChatViewModel(
                 )
             }
             else -> {
-                messageCreatorInteractor.create(
+                messageCreatorInteractor.send(
                     id = id,
                     authorId = authorId,
                     chatId = chatId,

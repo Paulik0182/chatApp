@@ -23,6 +23,9 @@ class DetailsChatFragment : ViewBindingFragment<FragmentDetailsChatBinding>(
 
     private val app: App get() = requireActivity().application as App
 
+    // это передача контекста всего экрана, всего приложения (при повороте экрана не меняется)
+    private val app1: App get() = requireActivity().applicationContext as App
+
     private val messageRepo: MessageRepo by lazy {
         app.messageRepo
     }
@@ -39,7 +42,6 @@ class DetailsChatFragment : ViewBindingFragment<FragmentDetailsChatBinding>(
         DetailsChatViewModel(
             messageRepo = messageRepo,
             chatId = requireArguments().getString(ID_CHAT_KEY)!!,
-            context = requireContext(),
             messageCreatorInteractor = messageCreatorInteractor
         )
     }
@@ -66,6 +68,7 @@ class DetailsChatFragment : ViewBindingFragment<FragmentDetailsChatBinding>(
 
     private fun saveNewMessage() {
         viewModel.onSaveNewMessage(
+            context = requireActivity(),
             id = UUID.randomUUID().toString(),
             authorId = "1",
             chatId = requireArguments().getString(ID_CHAT_KEY)!!,
