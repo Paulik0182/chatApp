@@ -82,6 +82,9 @@ class DetailsChatFragment : ViewBindingFragment<FragmentDetailsChatBinding>(
     private fun initObservers() {
         viewModel.messageLiveData.observe(viewLifecycleOwner) {
             adapter.setData(it)
+
+            // скролим recyclerView (чтобы клавиатура не перекрывала данные)
+            binding.recordsRecyclerView.smoothScrollToPosition(adapter.itemCount)
         }
 
         viewModel.errorLiveData.observe(viewLifecycleOwner) {
