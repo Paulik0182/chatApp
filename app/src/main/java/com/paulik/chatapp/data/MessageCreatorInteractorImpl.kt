@@ -8,7 +8,7 @@ import com.paulik.chatapp.domain.repo.MessageRepo
 class MessageCreatorInteractorImpl(
     private val messageRepo: MessageRepo
 ) : MessageCreatorInteractor {
-    override fun create(
+    override fun send(
         id: String,
         authorId: String,
         chatId: String,

@@ -4,7 +4,7 @@ import com.paulik.chatapp.domain.entity.MessageEntity
 
 interface MessageCreatorInteractor {
 
-    fun create(
+    fun send(
         id: String,
         authorId: String,
         chatId: String,

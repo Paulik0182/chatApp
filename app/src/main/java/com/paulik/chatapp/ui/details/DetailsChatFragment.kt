@@ -93,8 +93,8 @@ class DetailsChatFragment : ViewBindingFragment<FragmentDetailsChatBinding>(
             }
         }
 
-        viewModel.dialogLiveData.observe(viewLifecycleOwner) {
-            context?.toastMake(it.massage)
+        viewModel.systemAlertLiveData.observe(viewLifecycleOwner) {
+            context?.toastMake(it.message)
         }
     }
 

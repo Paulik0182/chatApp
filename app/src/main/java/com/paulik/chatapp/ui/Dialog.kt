@@ -1,10 +1,10 @@
-package com.paulik.chatapp.ui.root
+package com.paulik.chatapp.ui
 
-sealed class CloseDialog(val massage: String, val runnable: Runnable? = null) {
+sealed class SystemAlert(val message: String, val runnable: Runnable? = null) {
 
     // перечисляются все потомки класса
-    class ShowDialog(massage: String) : CloseDialog(massage)
+    class ShowAlert(message: String) : SystemAlert(message)
 
-    class ShowCloseDialog(massage: String, runnable: Runnable? = null) :
-        CloseDialog(massage, runnable)
+    class ShowCloseAlert(message: String, runnable: Runnable? = null) :
+        SystemAlert(message, runnable)
 }
