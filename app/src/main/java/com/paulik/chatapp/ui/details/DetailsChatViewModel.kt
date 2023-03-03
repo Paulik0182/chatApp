@@ -10,7 +10,7 @@ import com.paulik.chatapp.domain.ErrorMessage
 import com.paulik.chatapp.domain.entity.MessageEntity
 import com.paulik.chatapp.domain.interactors.MessageCreatorInteractor
 import com.paulik.chatapp.domain.repo.MessageRepo
-import com.paulik.chatapp.ui.CloseDialog
+import com.paulik.chatapp.ui.SystemAlert
 import com.paulik.chatapp.ui.root.CreationChatMessageErrors
 import com.paulik.chatapp.utils.mutable
 import com.paulik.chatapp.utils.toString
@@ -26,7 +26,7 @@ class DetailsChatViewModel(
     val messageLiveData: LiveData<List<MessageEntity>> = MutableLiveData()
 
     // для дополнительного уведомления
-    val dialogLiveData: LiveData<CloseDialog> = MutableLiveData()
+    val systemAlertLiveData: LiveData<SystemAlert> = MutableLiveData()
 
     // для сообщения ошибки
     val errorLiveData: LiveData<CreationChatMessageErrors> = MutableLiveData()
@@ -50,29 +50,30 @@ class DetailsChatViewModel(
         time: Long?,
         mine: Boolean
     ) {
-        when {
-            text.isEmpty() -> {
+        if (chatEmptyMessageError(context, text)) return
+
+        messageCreatorInteractor.send(
+            id = id,
+            authorId = authorId,
+            chatId = chatId,
+            text = text,
+            time = time,
+            mine = mine
+        )
+        systemAlertLiveData.mutable().postValue(
+            SystemAlert.ShowCloseAlert(context.getString(R.string.shipped))
+        )
+    }
+
+    private fun chatEmptyMessageError(context: Context, text: String): Boolean {
+        val isEmpty = text.isEmpty()
+        if (isEmpty) {
+            errorLiveData.mutable().postValue(
                 CreationChatMessageErrors.TextChatMessage(
                     ErrorMessage.TEXT_CHAT_MESSAGE.toString(context)
                 )
-            }
-            else -> {
-                messageCreatorInteractor.send(
-                    id = id,
-                    authorId = authorId,
-                    chatId = chatId,
-                    text = text,
-                    time = time,
-                    mine = mine
-                )
-                dialogLiveData.mutable().postValue(
-                    CloseDialog.ShowCloseDialog(context.getString(R.string.shipped))
-                )
-                null
-            }
-        }?.let {
-            errorLiveData.mutable().postValue(it)
-            return
+            )
         }
+        return isEmpty
     }
 }
