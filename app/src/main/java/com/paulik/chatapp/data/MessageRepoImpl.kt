@@ -101,6 +101,11 @@ class MessageRepoImpl : MessageRepo {
     }
 
     override fun getMessageUpdates(chatId: String): Observable<List<MessageEntity>> {
-        return messagesObservable
+        // фильтруем сообщения именно здесь, так как во viewModel это делать нельзя, раньше получалось
+        // что все сообщения передовались на UI и фильтровались там.
+        // В данном случае получили объект Observable  + одно приобразование. приобразований может быть множество
+        return messagesObservable.map { message ->
+            message.filter { it.chatId == chatId }
+        }
     }
 }

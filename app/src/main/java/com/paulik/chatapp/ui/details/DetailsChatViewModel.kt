@@ -32,10 +32,10 @@ class DetailsChatViewModel(
     val errorLiveData: LiveData<CreationChatMessageErrors> = MutableLiveData()
 
     init {
+        // Observable объект messageRepo.getMessageUpdates(chatId) | subscribe - подписываемся на объект
+        // далее внутри это то, что будет происходить когда придут новые данные
         messageRepo.getMessageUpdates(chatId).subscribe {// подписка на обновление
-            messageRepo.getMessages(chatId).let {
-                messageLiveData.mutable().postValue(it)
-            }
+            messageLiveData.mutable().postValue(it)
         }
     }
 
